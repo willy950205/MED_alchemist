@@ -49,6 +49,7 @@ public class ApiRestTemplateUtil {
         params.add("pageNo", "1");
         params.add("numOfRows", "3");
         params.add("itemName", UriEncoder.encode("지르텍"));
+        params.add("type", "json");
 
         URI uri = UriComponentsBuilder
                 .fromUriString(API_URL)
