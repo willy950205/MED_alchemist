@@ -13,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.yaml.snakeyaml.util.UriEncoder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -47,13 +48,13 @@ public class ApiRestTemplateUtil {
         params.add("ServiceKey", API_KEY);
         params.add("pageNo", "1");
         params.add("numOfRows", "3");
-        params.add("itemName", "지르텍");
+        params.add("itemName", UriEncoder.encode("지르텍"));
 
         URI uri = UriComponentsBuilder
                 .fromUriString(API_URL)
                 .path("/getDrbEasyDrugList")
                 .queryParams(params)
-                .build().toUri();
+                .build(true).toUri();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
 
         return responseEntity.getBody();
